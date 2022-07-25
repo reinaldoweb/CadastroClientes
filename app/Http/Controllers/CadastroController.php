@@ -11,13 +11,16 @@ class CadastroController extends Controller
 
     public function index()
     {
-        $cadastro = Cadastro::all();
-        return view('site.all', ['titulo'=>'Usuários cadastados', 'users'=> $cadastro]);
+        return view('welcome');
     }
 
+    //Mostra todos os cadastrados
+
     //Adiconando usuarios
-    public function add(Request $request)
+    public function store(Request $request)
     {
+        // dd($request->all());
+
         $cadastro = new Cadastro([
             'nome' => $request->input('nome'),
             'sobrenome' => $request->input('sobreNome'),

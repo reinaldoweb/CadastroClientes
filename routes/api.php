@@ -2,6 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\CadastroController;
 
 /*
 |--------------------------------------------------------------------------
@@ -14,12 +15,14 @@ use Illuminate\Support\Facades\Route;
 |
 */
 
-Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
-    return $request->user();
+// Route::middleware('auth:sanctum')->get('/user', function (Request $request) {
+//     return $request->user();
+// });
+
+// Route::post('/api/add', 'CadastroController@add')->name('site.add');
+
+
+Route::middleware('api')->group(function () {
+    Route::resource('clientes', CadastroController::class);
 });
-
-Route::post('/api/add', 'CadastroController@add')->name('site.add');
-
-
-
 
