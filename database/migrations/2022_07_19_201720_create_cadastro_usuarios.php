@@ -21,7 +21,7 @@ return new class extends Migration
             $table->string('telefone', 11);
             $table->string('endereco', 255);
             $table->string('idade', 2);
-            $table->text('msg');
+            $table->text('msg')->nullable();
             $table->timestamps();
         });
     }

@@ -22,7 +22,8 @@ use App\Http\Controllers\CadastroController;
 // Route::post('/api/add', 'CadastroController@add')->name('site.add');
 
 
-Route::middleware('api')->group(function () {
-    Route::resource('clientes', CadastroController::class);
-});
-
+Route::get('/clientes', [CadastroController::class, 'index'])->name('listar.clientes');
+Route::get('/clientes/{id}', [CadastroController::class, 'getById'])->name('lista.cliente.x.id');
+Route::post('/clientes', [CadastroController::class, 'addClient'])->name('criar.cliente');
+Route::put('/clientes/{id}', [CadastroController::class, 'update'])->name('atualizar.cliente');
+Route::delete('/clientes/{id}', [CadastroController::class, 'delete'])->name('deletar.cliente');

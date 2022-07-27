@@ -14,7 +14,7 @@
         </tr>
       </thead>
       <tbody>
-        <tr v-for="cliente in clientes" :key="cliente.id">
+        <tr v-for="cliente in paginator.data" :key="cliente.id">
           <td>{{ cliente.id }}</td>
           <td>{{ cliente.nome }}</td>
           <td>{{ cliente.sobrenome }}</td>
@@ -24,9 +24,8 @@
 
           <td>
             <div class="btn-group" role="group">
-                <router-link :to="{name: 'edit', params:{id: cliente.id }}" class="btn tbn-primary">
-                <button class="btn btn-danger" @click="delete(cliente.id)">Delete</button>
-                </router-link>
+                <q-btn size="xs" color="primary" stretch flat label="editar" :to="`/editar/cliente/${cliente.id}`" />
+                <q-btn size="xs" color="negative" stretch flat label="apagar" @click="deleteCliente(cliente.id)" />
             </div>
           </td>
         </tr>
@@ -36,28 +35,33 @@
 </template>
 
 <script>
+import { onMounted, ref } from 'vue';
+import axios from 'axios';
 export default{
-    data(){
-        return {
-            clientes: []
+    name: 'AllClients',
+    setup(){
+        const paginator = ref({});
+
+
+        const getClientes = async () => {
+            const {data} = await axios.get('/api/clientes')
+            paginator.value = data
+            console.log(paginator.value)
         }
-    },
-    created(){
-        this.axios
-        .get(`http://127.0.0.1/api/clients/${id}`)
-        .then(response => {
-            let i = this.clients.map(data => data.id).indexOf(id);
-            this.clients.splice(i,1)
-        });
-    },
-    methods:{
-        deleteClient(id){
-            this.axios
-            .delete(`http://127.0.0.1:8000/api/client/delete/${id}`)
-            .then(respnse=>{
-                let i = this.clients.map(item=> item.id).indexOf(id);
-                this.clients.splice(i,1)
-            });
+        onMounted(() =>{
+            getClientes()
+        })
+
+        async function deleteCliente(id) {
+            const resp = axios.post(`/api/clientes/${id}`, { _method: 'DELETE'})
+            if(resp.status){
+                router.push({path: '/listar/clientes'})
+            }
+        }
+
+        return {
+            paginator,
+            deleteCliente
         }
     }
 }

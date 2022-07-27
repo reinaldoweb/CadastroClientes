@@ -6,11 +6,23 @@
                 <form @submit.prevent="updateClient">
                     <div class="form-group">
                         <label>Name</label>
-                        <input type="text" class="form-control" v-model="client.name">
+                        <input type="text" class="form-control" v-model="client.nome">
                     </div>
                     <div class="form-group">
-                        <label>Detail</label>
-                        <input type="text" class="form-control" v-model="client.detail">
+                        <label>Sobre nome</label>
+                        <input type="text" class="form-control" v-model="client.sobreNome">
+                    </div>
+                    <div class="form-group">
+                        <label>Email</label>
+                        <input type="text" class="form-control" v-model="client.email">
+                    </div>
+                    <div class="form-group">
+                        <label>Telefone</label>
+                        <input type="text" class="form-control" v-model="client.telefone">
+                    </div>
+                    <div class="form-group">
+                        <label>Idade</label>
+                        <input type="text" class="form-control" v-model="client.idade">
                     </div>
                     <button type="submit" class="btn btn-primary">Update</button>
                 </form>
@@ -20,27 +32,24 @@
 </template>
 
 <script>
-    export default {
-        data() {
-            return {
-                client: {}
-            }
-        },
-        created() {
-            this.axios
-                .get(`http://localhost:8000/api/clients/${this.$route.params.id}`)
-                .then((res) => {
-                    this.client = res.data;
-                });
-        },
-        methods: {
-            updateclient() {
-                this.axios
-                    .patch(`http://localhost:8000/api/clients/${this.$route.params.id}`, this.client)
-                    .then((res) => {
-                        this.$router.push({ name: 'home' });
-                    });
-            }
+import { ref } from 'vue'
+export default {
+    name: 'EditClient',
+    setup(){
+        const client = ref({
+            nome: '',
+            sobreNome: '',
+            telefone: '',
+            idade: '',
+            email: ''
+        })
+
+
+
+
+        return {
+            client
         }
     }
+}
 </script>

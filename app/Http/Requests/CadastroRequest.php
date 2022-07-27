@@ -1,0 +1,49 @@
+<?php
+
+namespace App\Http\Requests;
+
+use Illuminate\Foundation\Http\FormRequest;
+use App\Traits\RequestFailed;
+
+class CadastroRequest extends FormRequest
+{
+    use RequestFailed;
+    /**
+     * Determine if the user is authorized to make this request.
+     *
+     * @return bool
+     */
+    public function authorize()
+    {
+        return true;
+    }
+
+    /**
+     * Get the validation rules that apply to the request.
+     *
+     * @return array<string, mixed>
+     */
+    public function rules()
+    {
+        return [
+            'email' => ['required'],
+            'idade' => ['required'],
+            'telefone' => ['required'],
+            'nome' => ['required'],
+            'sobreNome' => ['required'],
+            'endereco' => ['required']
+        ];
+    }
+
+    public function messages()
+    {
+        return [
+            'email.required' => 'Email é requerido',
+            'idade.required' => 'Idade é requerida',
+            'telefone.required' => 'Telefone é requerido',
+            'nome.required' => 'Nome é requerido',
+            'sobreNome.required' => 'Sobrenome é requerido',
+            'endereco.required' => 'Endereço é requerido',
+        ];
+    }
+}

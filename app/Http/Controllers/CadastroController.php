@@ -4,6 +4,8 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use App\Models\Cadastro;
+use Illuminate\Support\Facades\Validator;
+use App\Http\Requests\CadastroRequest;
 
 class CadastroController extends Controller
 {
@@ -11,47 +13,63 @@ class CadastroController extends Controller
 
     public function index()
     {
-        return view('welcome');
+        $clients = Cadastro::orderBy('updated_at', 'desc')->paginate(10);
+
+        return response()->json($clients);
     }
 
     //Mostra todos os cadastrados
 
     //Adiconando usuarios
-    public function store(Request $request)
+    public function addClient(CadastroRequest $request)
     {
-        // dd($request->all());
+        $cadastro = new Cadastro;
+        $cadastro->fill($request->validated());
 
-        $cadastro = new Cadastro([
-            'nome' => $request->input('nome'),
-            'sobrenome' => $request->input('sobreNome'),
-            'email' => $request->input('email'),
-            'telefone' => $request->input('telefone'),
-            'idade' => $request->input('idade')
+        if(!$cadastro->save()){
+            return response()->json(['message'=> 'erro ao salvar'], 422);
+        }
+
+        return response()->json([
+            'message' => 'Cadastro adicionado com sucesso!'
         ]);
-        $cadastro->save();
-        return response()->json('Cadastro adicionado com sucesso!');
-    }
-
-    //Editar usuarios
-    public function edit($id)
-    {
-        $users = Cadastro::find($id);
-        return response()->json($users);
     }
 
 
     //Update cadastrados
 
-    public function update($id, Request $request){
-        $user = Cadastro::find($id);
-        $user->update($request->all());
-        return response()->json('Cadastro atualizado com sucesso');
+    public function update(CadastroRequest $request, $id)
+    {
+        $usuario = Cadastro::find($id);
+        $usuario->fill($request->validated());
+
+        if(!$usuario->save()){
+            return response()->json([
+                'message' => 'Não foi possível salvar o usuário'
+            ]);
+        }
+        return response()->json([
+            'message' => 'Cadastro atualizado com sucesso',
+            'usuario' => $usuario
+        ]);
+    }
+
+    public function getById($id)
+    {
+        $usuario = Cadastro::find($id);
+
+        return response()->json($usuario);
     }
 
    //Delete Cadastro
    public function delete($id){
     $user = Cadastro::find($id);
-    $user->delete();
-    return response()->json('Cadstro deletado com sucesso.');
+    if(!$user->delete()){
+        return response()->json(['message'=> 'Não foi possivel deletar'], 422);
+    }
+
+    return response()->json([
+        'message' => 'Cadastro deletado com sucesso.'
+    ], 200);
    }
 }
