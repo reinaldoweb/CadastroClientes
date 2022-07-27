@@ -1,7 +1,9 @@
 <template>
-  <div class="container" padding>
-    <h4 class="q-pt-20">Adicionar novo Cliente <span v-if="message"> {{message}}</span></h4>
-    <q-form @submit.prevent="save" class="q-gutter-md">
+<div class="container">
+<div class="row">
+    <h4 class="q-pt-10">Adicionar novo Cliente <span v-if="message"> {{message}}</span></h4>
+
+    <q-form @submit.prevent="save" class="">
       <div class="row q-col-gutter-md">
         <q-input
           outlined
@@ -9,7 +11,7 @@
           label="Nome"
           stack-label
           dense
-          class="col-md-12 col-sm-12 col-xs-12"
+          class=""
           :error-message="`${errors.name}`"
           bottom-slots
         >
@@ -26,7 +28,7 @@
           label="Sobre Nome"
           stack-label
           dense
-          class="col-md-12 col-sm-12 col-xs-12"
+          class=""
         >
           <template v-slot:prepend>
             <q-icon name="person" />
@@ -40,7 +42,7 @@
           suffix="@seuemail.com"
           stack-label
           dense
-          class="col-md-12 col-sm-12 col-xs-12"
+          class=""
         >
           <template v-slot:prepend>
             <q-icon name="mail" />
@@ -54,7 +56,8 @@
           stack-label
           mask="(###) ##### - ####"
           unmasked-value
-          class="col-md-12 col-sm-12 col-xs-12"
+          dense
+          class=""
         >
           <template v-slot:prepend>
             <q-icon name="call" />
@@ -67,40 +70,48 @@
           label="Endereço"
           stack-label
           dense
-          class="col-md-12 col-sm-12 col-xs-12"
+          class=""
         >
 
           <template v-slot:prepend>
             <q-icon name="home" />
           </template>
         </q-input>
-
-         <q-input
+        <q-input
           outlined
-          v-model.number="cliente.cidade"
+          v-model="cliente.bairro"
           type="text"
-          label="cidade"
+          label="Bairro"
           stack-label
           dense
-          class="col-md-12 col-sm-12 col-xs-12"
+          class=""
         />
          <q-input
           outlined
-          v-model.number="cliente.uf"
+          v-model="cliente.cidade"
+          type="text"
+          label="Cidade"
+          stack-label
+          dense
+          class=""
+        />
+         <q-input
+          outlined
+          v-model="cliente.uf"
           label="Uf"
           stack-label
           dense
-          class="col-md-12 col-sm-12 col-xs-12"
+          class=""
         />
 
         <q-input
           outlined
-          v-model.number="cliente.idade"
+          v-model="cliente.idade"
           type="number"
           label="Idade"
           stack-label
           dense
-          class="col-md-12 col-sm-12 col-xs-12"
+          class=""
         />
       </div>
 
@@ -120,6 +131,9 @@
       </div>
     </q-form>
   </div>
+
+</div>
+
 </template>
 <script>
 import { ref, onMounted } from 'vue'
@@ -134,6 +148,8 @@ export default {
             telefone: '',
             email: '',
             endereco: '',
+            cidade:'',
+            uf:'',
             idade: ''
         })
         const errors = ref({})

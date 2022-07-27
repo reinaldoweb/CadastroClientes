@@ -41,7 +41,9 @@ export default {
             sobreNome: '',
             telefone: '',
             idade: '',
-            email: ''
+            email: '',
+            cidade:'',
+            uf:''
         });
 
         return {

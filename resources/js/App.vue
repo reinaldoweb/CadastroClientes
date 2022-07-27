@@ -1,11 +1,11 @@
 <template>
     <q-layout
-        view="lHh lpr lFf"
+        view=""
         container
         style="height: 850px"
         class="shadow-1 "
     >
-        <Header class="q-mb-md"/>
+        <Header class=""/>
         <router-view></router-view>
     </q-layout>
 </template>

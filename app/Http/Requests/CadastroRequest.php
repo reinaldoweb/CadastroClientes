@@ -33,7 +33,8 @@ class CadastroRequest extends FormRequest
             'sobrenome' => ['required'],
             'endereco' => ['required'],
             'cidade' => ['required'],
-            'uf' => ['uf']
+            'uf' => ['required'],
+            'bairro' => ['required']
         ];
     }
 
@@ -46,6 +47,9 @@ class CadastroRequest extends FormRequest
             'nome.required' => 'Nome é requerido',
             'sobrenome.required' => 'Sobrenome é requerido',
             'endereco.required' => 'Endereço é requerido',
+            'cidade.required' => 'Cidade é requerido',
+            'uf.required' => 'Uf é requerido',
+            'bairro.required' => 'Bairro é requerido'
         ];
     }
 }
