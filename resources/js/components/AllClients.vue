@@ -1,5 +1,8 @@
 <template>
-    <div>
+    <div class="container">
+
+
+
         <h3 class="text-center">Clientes Cadastrados</h3>
 
         <table class="table table-bordered">
