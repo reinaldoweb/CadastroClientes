@@ -32,6 +32,7 @@
             <q-icon name="person" />
           </template>
         </q-input>
+
         <q-input
           outlined
           v-model="cliente.email"
@@ -45,6 +46,7 @@
             <q-icon name="mail" />
           </template>
         </q-input>
+
         <q-input
           outlined
           v-model="cliente.telefone"
@@ -67,10 +69,29 @@
           dense
           class="col-md-12 col-sm-12 col-xs-12"
         >
+
           <template v-slot:prepend>
             <q-icon name="home" />
           </template>
         </q-input>
+
+         <q-input
+          outlined
+          v-model.number="cliente.cidade"
+          type="text"
+          label="cidade"
+          stack-label
+          dense
+          class="col-md-12 col-sm-12 col-xs-12"
+        />
+         <q-input
+          outlined
+          v-model.number="cliente.uf"
+          label="Uf"
+          stack-label
+          dense
+          class="col-md-12 col-sm-12 col-xs-12"
+        />
 
         <q-input
           outlined

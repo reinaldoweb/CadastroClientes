@@ -42,7 +42,6 @@ export default{
     setup(){
         const paginator = ref({});
 
-
         const getClientes = async () => {
             const {data} = await axios.get('/api/clientes')
             paginator.value = data
@@ -53,9 +52,9 @@ export default{
         })
 
         async function deleteCliente(id) {
-            const resp = axios.post(`/api/clientes/${id}`, { _method: 'DELETE'})
+            const resp = await axios.delete(`/api/clientes/${id}`)
             if(resp.status){
-                router.push({path: '/listar/clientes'})
+                router.push({path:'/listar/clientes'})
             }
         }
 

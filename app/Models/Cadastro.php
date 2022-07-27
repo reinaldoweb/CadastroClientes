@@ -10,5 +10,5 @@ class Cadastro extends Model
     use HasFactory;
     protected $table = 'cadastro_usuarios';
 
-    protected $fillable=['nome', 'sobreNome','email','telefone','endereco','idade','msg'];
+    protected $fillable=['nome', 'sobrenome','email','telefone','endereco','idade','cidade', 'uf'];
 }

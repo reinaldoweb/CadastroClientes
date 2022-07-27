@@ -10,7 +10,7 @@
                     </div>
                     <div class="form-group">
                         <label>Sobre nome</label>
-                        <input type="text" class="form-control" v-model="client.sobreNome">
+                        <input type="text" class="form-control" v-model="client.sobrenome">
                     </div>
                     <div class="form-group">
                         <label>Email</label>
@@ -42,10 +42,7 @@ export default {
             telefone: '',
             idade: '',
             email: ''
-        })
-
-
-
+        });
 
         return {
             client
