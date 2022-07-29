@@ -16,6 +16,8 @@
     "dependencies": {
         "@quasar/extras": "^1.14.3",
         "@vitejs/plugin-vue": "^2.3.3",
+        "@vuelidate/core": "^2.0.0-alpha.43",
+        "@vuelidate/validators": "^2.0.0-alpha.31",
         "package-name": "^0.1.0",
         "quasar": "^2.7.5",
         "vue": "^3.2.36",

@@ -1,19 +1,19 @@
 <template>
 <div class="container">
-<div class="row">
+<div class="row q-pa-xl"  >
     <h4 class="q-pt-10">Adicionar novo Cliente <span v-if="message"> {{message}}</span></h4>
 
     <q-form @submit.prevent="save" class="">
-      <div class="row q-col-gutter-md">
+      <div class="row q-col-gutter-md" >
         <q-input
           outlined
           v-model="cliente.nome"
           label="Nome"
           stack-label
           dense
-          class=""
           :error-message="`${errors.name}`"
           bottom-slots
+         :error="!isValid"
         >
             <template v-slot:prepend>
                 <q-icon name="person" />
@@ -54,7 +54,7 @@
           v-model="cliente.telefone"
           label="Telefone"
           stack-label
-          mask="(###) ##### - ####"
+          mask="(###)#####-####"
           unmasked-value
           dense
           class=""
@@ -98,10 +98,13 @@
          <q-input
           outlined
           v-model="cliente.uf"
-          label="Uf"
+          label="UF"
           stack-label
           dense
-          class=""
+          buttom-slots
+          hint="Max 2 characters"
+         error-message="Usar no maximo 2 caracteres"
+        :error="!isValid"
         />
 
         <q-input
@@ -111,7 +114,7 @@
           label="Idade"
           stack-label
           dense
-          class=""
+
         />
       </div>
 
@@ -121,13 +124,7 @@
           type="submit"
           color="primary"
         />
-        <q-btn
-          label="Reset"
-          type="reset"
-          color="primary"
-          flat
-          class="q-ml-sm"
-        />
+
       </div>
     </q-form>
   </div>
@@ -136,12 +133,14 @@
 
 </template>
 <script>
-import { ref, onMounted } from 'vue'
+import { ref, onMounted, computed } from 'vue'
 import axios from 'axios'
 import { useRouter, useRoute } from 'vue-router'
+
+
 export default {
     name: 'AddClient',
-    setup(props, {root}) {
+    setup() {
         const cliente = ref({
             nome: '',
             sobrenome: '',
@@ -149,11 +148,12 @@ export default {
             email: '',
             endereco: '',
             cidade:'',
-            uf:'',
+            uf:"",
             idade: ''
         })
+        const model = ref('')
         const errors = ref({})
-        const message = ref('');
+        const message = ref('')
 
         const router = useRouter()
         const route = useRoute()
@@ -183,7 +183,9 @@ export default {
             save,
             cliente,
             message,
-            errors
+            errors,
+            model,
+            isValid: computed(() => model.value.length <= 2)
         }
     }
 }

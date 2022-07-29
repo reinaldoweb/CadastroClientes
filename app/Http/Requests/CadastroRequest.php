@@ -48,7 +48,7 @@ class CadastroRequest extends FormRequest
             'sobrenome.required' => 'Sobrenome é requerido',
             'endereco.required' => 'Endereço é requerido',
             'cidade.required' => 'Cidade é requerido',
-            'uf.required' => 'Uf é requerido',
+            'uf.required' => 'UF é requerido',
             'bairro.required' => 'Bairro é requerido'
         ];
     }

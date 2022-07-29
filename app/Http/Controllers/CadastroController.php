@@ -13,7 +13,7 @@ class CadastroController extends Controller
 
     public function index()
     {
-        $clients = Cadastro::orderBy('updated_at', 'desc')->paginate(10);
+        $clients = Cadastro::orderBy('updated_at', 'asc')->paginate(50);
 
         return response()->json($clients);
     }
