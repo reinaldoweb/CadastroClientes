@@ -1,8 +1,8 @@
 <template>
     <q-layout
-        view=""
+
         container
-        style="height: 850px"
+        style="height: 100vh"
         class="shadow-1 "
     >
         <Header class=""/>
