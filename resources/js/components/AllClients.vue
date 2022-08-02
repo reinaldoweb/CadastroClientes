@@ -17,7 +17,7 @@
                     </tr>
                 </thead>
                 <tbody>
-                    <tr v-for="cliente in paginator.data" :key="cliente.id">
+                    <tr v-for="(cliente, index) in paginator.data" :key="cliente.id">
                         <td>{{ cliente.id }}</td>
                         <td>{{ cliente.nome }}</td>
                         <td>{{ cliente.sobrenome }}</td>
@@ -44,13 +44,19 @@
                                     stretch
                                     flat
                                     label="apagar"
-                                    @click="deleteCliente(cliente.id)"
+                                    @click="deleteCliente(cliente.id, index)"
                                 />
                             </div>
                         </td>
                     </tr>
                 </tbody>
             </table>
+            <q-pagination
+                v-if="paginator.total > 0"
+                @update:model-value="goToPage"
+                :max="paginator.last_page"
+                v-model="paginator.current_page"
+                direction-links />
         </div>
     </div>
 </template>
@@ -59,6 +65,7 @@
 import { onMounted, ref } from "vue";
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
+import { useQuasar } from 'quasar';
 
 export default {
     name: "AllClients",
@@ -66,28 +73,33 @@ export default {
         const paginator = ref({});
         const router = useRouter();
         const route = useRoute();
-
+        const $q = useQuasar()
         const getClientes = async () => {
             const { data } = await axios.get("/api/clientes");
             paginator.value = data;
-            console.log(paginator.value);
         };
         onMounted(() => {
             getClientes();
         });
 
-        async function deleteCliente(id) {
+        async function deleteCliente(id, index) {
             const resp = await axios.post(`/api/clientes/${id}`, {
                 _method: "DELETE",
             });
-            if (resp.status === 200) {
-                router.push({ path: "/listar/clientes" });
-            }
+
+            $q.notify({color: 'positive', message: resp.data.message})
+            paginator.value.data.splice(index, 1)
+        }
+
+        async function goToPage(page) {
+            const { data } = await axios.get(`/api/clientes?page=${page}`)
+            paginator.value = data
         }
 
         return {
             paginator,
             deleteCliente,
+            goToPage
         };
     },
 };

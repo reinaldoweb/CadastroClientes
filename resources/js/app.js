@@ -1,5 +1,5 @@
 import './bootstrap';
-import { Quasar } from 'quasar'
+import { Quasar, Notify } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 import { createWebHistory, createRouter } from "vue-router";
@@ -16,7 +16,7 @@ import App from './App.vue'
 const appTeste = createApp(App)
 
 appTeste.use(Quasar, {
-    plugins: {}, // import Quasar plugins and add here
+    plugins: {Notify}, // import Quasar plugins and add here
 })
 
 appTeste.use(router)
