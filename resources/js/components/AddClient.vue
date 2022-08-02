@@ -1,6 +1,7 @@
 <template>
 <div class="container">
-<div class="row q-pa-xl"  >
+<div class="row">
+
     <h4 class="q-pt-10">Adicionar novo Cliente <span v-if="message"> {{message}}</span></h4>
 
     <q-form @submit.prevent="save" class="">
@@ -116,6 +117,12 @@
           dense
 
         />
+        <q-input
+            v-model="image"
+             @update:model-value="val => { file = val[0] }"
+            filled
+            type="file"
+        />
       </div>
 
       <div class="q-pa-md q-gutter-sm">
@@ -150,7 +157,9 @@ export default {
             cidade:'',
             uf:"",
             idade: ''
+
         })
+        const image = ref(null)
         const model = ref('')
         const errors = ref({})
         const message = ref('')
@@ -159,7 +168,10 @@ export default {
         const route = useRoute()
 
         onMounted(()=>{
-            getUsuario()
+            if(route.params.id){
+                getUsuario()
+            }
+
         })
         async function getUsuario()
         {
@@ -168,8 +180,23 @@ export default {
         }
 
         async function save(){
+            const form = new FormData();
+            const url = !route.params.id ? '/api/clientes' : `/api/clientes/${route.params.id}`
+
+            form.append('_method', !route.params.id ? 'POST' : 'PUT')
+            form.append('image', image.value[0], image.value[0].name)
+            form.append('nome', cliente.value.nome)
+            form.append('sobrenome', cliente.value.sobrenome)
+            form.append('telefone', cliente.value.telefone)
+            form.append('email', cliente.value.email)
+            form.append('bairro', cliente.value.bairro)
+            form.append('endereco', cliente.value.endereco)
+            form.append('cidade', cliente.value.cidade)
+            form.append('uf', cliente.value.uf)
+            form.append('idade', cliente.value.idade)
+
             try {
-                const resp = await axios.post('/api/clientes', {...cliente.value})
+                const resp = await axios.post(url, form)
                 if(resp.status){
                     router.push({path: '/listar/clientes'})
                 }
@@ -177,6 +204,7 @@ export default {
                 errors.value = error.response.data.errors
                 message.value = error.response.data.message
             }
+
         }
 
         return {
@@ -185,6 +213,7 @@ export default {
             message,
             errors,
             model,
+            image,
             isValid: computed(() => model.value.length <= 2)
         }
     }

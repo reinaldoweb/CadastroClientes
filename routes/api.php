@@ -20,7 +20,9 @@ use App\Http\Controllers\CadastroController;
 // });
 
 // Route::post('/api/add', 'CadastroController@add')->name('site.add');
-
+Route::get('teste', function(){
+    dd(public_path(), storage_path());
+});
 
 Route::get('/clientes', [CadastroController::class, 'index'])->name('listar.clientes');
 Route::get('/clientes/{id}', [CadastroController::class, 'getById'])->name('lista.cliente.x.id');

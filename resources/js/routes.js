@@ -1,7 +1,8 @@
 import AllClients from './components/AllClients.vue';
 import AddClient from './components/AddClient.vue';
-import EditClient from './components/EditClient.vue';
+import ShowOneCliente from './components/ShowOneCliente.vue';
 import Home from './pages/Home.vue'
+import Contato from './pages/Contato.vue'
 
  const routes = [
     {
@@ -24,10 +25,17 @@ import Home from './pages/Home.vue'
         path: '/editar/cliente/:id',
         component: AddClient
     },
-   {
-    name: 'deletarCliente',
-    path: '/deletar/cliente/:id'
-    }
+    {
+        name: 'showOneCliente',
+        path: '/clientes/exibir/:id',
+        component: ShowOneCliente
+    },
+    {
+        name: 'contato',
+        path: '/cliente/contato',
+        component: Contato
+        }
+
 ];
 
 
