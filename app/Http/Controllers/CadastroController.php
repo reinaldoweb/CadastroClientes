@@ -33,7 +33,6 @@ class CadastroController extends Controller
             return response()->json(['message' => 'erro ao salvar'], 422);
         }
 
-
         return response()->json([
             'message' => 'Cadastro adicionado com sucesso!'
         ]);

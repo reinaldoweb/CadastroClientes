@@ -3,6 +3,7 @@ import AddClient from './components/AddClient.vue';
 import ShowOneCliente from './components/ShowOneCliente.vue';
 import Home from './pages/Home.vue'
 import Contato from './pages/Contato.vue'
+import Login from './pages/Login.vue'
 
  const routes = [
     {
@@ -34,6 +35,11 @@ import Contato from './pages/Contato.vue'
         name: 'contato',
         path: '/cliente/contato',
         component: Contato
+        },
+        {
+            name: 'login',
+            path: '/cliente/login',
+            component: Login
         }
 
 ];

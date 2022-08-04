@@ -3,6 +3,7 @@
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\CadastroController;
+use App\Http\Controllers\LoginController;
 
 /*
 |--------------------------------------------------------------------------
@@ -29,3 +30,11 @@ Route::get('/clientes/{id}', [CadastroController::class, 'getById'])->name('list
 Route::post('/clientes', [CadastroController::class, 'addClient'])->name('criar.cliente');
 Route::put('/clientes/{id}', [CadastroController::class, 'update'])->name('atualizar.cliente');
 Route::delete('/clientes/{id}', [CadastroController::class, 'delete'])->name('deletar.cliente');
+
+Route::get('/usuario', [LoginController::class, 'index'])->name('login.usuario');
+Route::post('/usuario/autenticar', [LoginController::class, 'autenticar'])->name('autenticar.usuario');
+Route::post('/usuarios', [LoginController::class, 'store'])->name('add.usuario');
+Route::put('/usuario/{id}', [LoginController::class, 'update'])->name('atualizar.usuario');
+Route::delete('/usuario/{id}', [LoginController::class, 'destroy'])->name('deletar.usuario');
+
+
