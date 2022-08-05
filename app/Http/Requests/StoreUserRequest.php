@@ -3,9 +3,11 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use App\Traits\RequestFailed;
 
 class StoreUserRequest extends FormRequest
 {
+    use RequestFailed;
     /**
      * Determine if the user is authorized to make this request.
      *
@@ -24,7 +26,7 @@ class StoreUserRequest extends FormRequest
     public function rules()
     {
         return [
-
+            'name' => ['required|max:255'],
             'usuario' => ['required'],
             'password' => ['required']
 

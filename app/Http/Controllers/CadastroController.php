@@ -65,7 +65,7 @@ class CadastroController extends Controller
     }
 
     //Delete Cadastro
-    public function delete($id)
+    public function destroy($id)
     {
         $user = Cadastro::find($id);
         if (!$user->delete()) {

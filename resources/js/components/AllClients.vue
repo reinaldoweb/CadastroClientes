@@ -1,9 +1,9 @@
 <template>
     <div class="container">
         <h3 class="text-center">Cadastrados</h3>
-        <div class="row q-pa-md">
-            <table class="table table-bordered">
-                <thead>
+        <div class="row q-pa-md justify-center">
+            <q-markup-table class="table table-bordered" width="80%">
+                <thead class="text-center">
                     <tr>
                         <th>ID</th>
                         <th>Nome</th>
@@ -23,7 +23,13 @@
                         :key="cliente.id"
                     >
                         <td>{{ cliente.id }}</td>
-                        <td><router-link class="text-primary" :to="`/clientes/exibir/${cliente.id}`">{{ cliente.nome }}</router-link></td>
+                        <td>
+                            <router-link
+                                class="text-primary"
+                                :to="`/clientes/exibir/${cliente.id}`"
+                                >{{ cliente.nome }}</router-link
+                            >
+                        </td>
                         <td>{{ cliente.sobrenome }}</td>
                         <td>{{ cliente.email }}</td>
                         <td>{{ cliente.idade }}</td>
@@ -31,41 +37,47 @@
                         <td>{{ cliente.cidade }}</td>
                         <td>{{ cliente.bairro }}</td>
                         <td>{{ cliente.uf }}</td>
-                        <td><img width="20" height="20" :src="`${cliente.image}`"></td>
+                        <td>
+                            <img
+                                width="20"
+                                height="20"
+                                :src="`${cliente.image}`"
+                            />
+                        </td>
 
                         <td>
                             <div class="btn-group" role="group">
                                 <q-btn
-                                    size="md"
+                                size="md"
                                     color="primary"
                                     stretch
                                     flat
-                                    label="editar"
                                     :to="`/editar/cliente/${cliente.id}`"
+                                    icon="editar"
                                 />
                                 <q-btn
-                                    size="md"
-                                    color="negative"
+                                size="md"
+                                    icon="delete"
                                     stretch
                                     flat
-                                    label="apagar"
                                     @click="deleteCliente(cliente.id, index)"
                                 />
                             </div>
                         </td>
                     </tr>
                 </tbody>
-            </table>
+            </q-markup-table>
         </div>
-    </div>
-    <div class="row q-pa-lg-none">
-        <q-pagination
-            v-if="paginator.total > 0"
-            @update:model-value="goToPage"
-            :max="paginator.last_page"
-            v-model="paginator.current_page"
-            direction-links
-        />
+        <div class="row q-pa-lg-none"></div>
+        <div class="row justify-center">
+            <q-pagination
+                v-if="paginator.total > 0"
+                @update:model-value="goToPage"
+                :max="paginator.last_page"
+                v-model="paginator.current_page"
+                direction-links
+            />
+        </div>
     </div>
 </template>
 

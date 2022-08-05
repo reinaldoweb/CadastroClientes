@@ -1,9 +1,9 @@
 <template>
     <div class="container">
-        <h4 class="text-weight-bolder text-center">Pagina de Login</h4>
 
-        <div class="row q-pa-md">
-        <div class="q-justify-content-center">
+        <h4 class="text-weight-bolder text-center">Pagina de Login</h4>
+        <div class="row q-pa-md justify-center">
+
                     <q-form @submit.prevent.stop="onSubmit">
                 <q-card class="my-card">
                     <div class="q-pa-md">
@@ -37,7 +37,7 @@
             </q-form>
             </div>
         </div>
-    </div>
+
 </template>
 
 <script>

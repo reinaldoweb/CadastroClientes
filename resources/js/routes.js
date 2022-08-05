@@ -4,6 +4,7 @@ import ShowOneCliente from './components/ShowOneCliente.vue';
 import Home from './pages/Home.vue'
 import Contato from './pages/Contato.vue'
 import Login from './pages/Login.vue'
+import Register from './components/Register.vue'
 
  const routes = [
     {
@@ -38,8 +39,13 @@ import Login from './pages/Login.vue'
         },
         {
             name: 'login',
-            path: '/cliente/login',
+            path: '/login',
             component: Login
+        },
+        {
+            name: 'register',
+            path: '/register',
+            component: Register
         }
 
 ];

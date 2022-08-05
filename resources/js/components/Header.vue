@@ -1,14 +1,13 @@
 <template>
     <div class="q-pa-md">
         <div class="q-gutter-y-md column">
-
             <q-toolbar class="bg-primary text-white shadow-2 rounded-borders">
-        <q-btn flat round dense icon="menu" class="q-mr-sm" />
+                <q-btn flat round dense icon="menu" class="q-mr-sm" />
 
-        <q-separator dark vertical inset />
+                <q-separator dark vertical inset />
 
-        <q-btn stretch flat label="Home" to="/" />
-<q-btn
+                <q-btn stretch flat label="Home" to="/" />
+                <q-btn
                     stretch
                     flat
                     label="Listar Clientes"
@@ -26,16 +25,17 @@
                     label="Fale conosco"
                     to="/cliente/contato/"
                 />
-        <q-space />
+                <q-space />
 
+                <q-btn stretch flat label="Login" to="/cliente/login" />
 
+                <q-separator dark vertical />
+                <q-btn stretch flat label="Register" to="/cliente/register" />
 
-        <q-btn stretch flat label="Login" to="/cliente/login" />
+                <q-separator dark vertical />
 
-        <q-separator dark vertical />
-
-        <q-btn stretch flat label="Sair" />
-      </q-toolbar>
+                <q-btn stretch flat label="Sair" to="/user/logout"/>
+            </q-toolbar>
         </div>
     </div>
 
