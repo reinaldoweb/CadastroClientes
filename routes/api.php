@@ -46,7 +46,6 @@ Route::controller(AuthController::class)->group(function () {
 });
 
 Route::controller(LoginController::class)->group(function(){
-    // Route::post('/usuario/autenticar', [LoginController::class, 'auth'])->name('autenticar.usuario');
     Route::get('users', 'index');
     Route::post('user', 'store');
     Route::get('user/{id}', 'show');

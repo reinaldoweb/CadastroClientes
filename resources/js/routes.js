@@ -39,12 +39,12 @@ import Register from './components/Register.vue'
         },
         {
             name: 'login',
-            path: '/login',
+            path: '/user/login',
             component: Login
         },
         {
             name: 'register',
-            path: '/register',
+            path: '/user/register',
             component: Register
         }
 

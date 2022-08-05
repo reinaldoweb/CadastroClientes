@@ -27,10 +27,10 @@
                 />
                 <q-space />
 
-                <q-btn stretch flat label="Login" to="/cliente/login" />
+                <q-btn stretch flat label="Login" to="/user/login" />
 
                 <q-separator dark vertical />
-                <q-btn stretch flat label="Register" to="/cliente/register" />
+                <q-btn stretch flat label="Register" to="/user/register" />
 
                 <q-separator dark vertical />
 
@@ -87,6 +87,7 @@
             </q-carousel>
         </div>
     </div>
+
 </template>
 <script>
 import { ref } from "vue";
