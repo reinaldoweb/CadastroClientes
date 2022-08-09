@@ -1,10 +1,12 @@
 import './bootstrap';
-import { Quasar, Notify } from 'quasar'
+import { Quasar, Notify, LocalStorage, Dialog } from 'quasar'
 import '@quasar/extras/material-icons/material-icons.css'
 import 'quasar/src/css/index.sass'
 import { createWebHistory, createRouter } from "vue-router";
 import routes from './routes.js'
 import {createApp} from 'vue'
+
+
 
 const router = createRouter({
     history: createWebHistory(),
@@ -16,7 +18,7 @@ import App from './App.vue'
 const appTeste = createApp(App)
 
 appTeste.use(Quasar, {
-    plugins: {Notify}, // import Quasar plugins and add here
+    plugins: {Notify, LocalStorage, Dialog}, // import Quasar plugins and add here
 })
 
 appTeste.use(router)

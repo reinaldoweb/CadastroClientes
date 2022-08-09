@@ -17,54 +17,48 @@ class AuthController extends Controller
 
     public function login(Request $request)
     {
-        $request->validate([
+        $credentials = $request->validate([
             'email' => 'required |string|email',
             'password' => 'required |string',
         ]);
 
-        $credentials = $request->only('enail', 'password');
 
-        $token = Auth::attemp($credentials);
-        if ($token) {
+        if (!$token = auth()->attempt($credentials)) {
             return response()->json([
                 'status' => 'error',
-                'message' => 'Não autorizado',
-            ], 401);
+                'message' => 'Verifique seus dados de acesso',
+            ], 403);
         }
 
         $user = Auth::user();
         return response()->json([
             'status' => 'success',
             'user' => $user,
-            'authorization' => [
-                'token' => $token,
-                'type' => 'bearer',
-            ]
+            'token' => $token,
+            'type' => 'bearer',
         ]);
     }
 
-    public function register(Request $request){
-        $request->validate([
+    public function register(Request $request)
+    {
+
+        $values = $request->validate([
             'name' => 'required|string|max:255',
             'email' => 'required|string|email|max:255|unique:users',
-            'password' => 'required|string|min:6',
+            'password' => 'required|string|min:6|confirmed'
         ]);
 
-        $user = User::create([
-            'name' => $request->name,
-            'email' => $request->email,
-            'password' => bcrypt($request->password),
-        ]);
+        $user = User::create($values);
 
         $token = Auth::login($user);
+
         return response()->json([
             'status' => 'success',
-            'message' => 'User created successfully',
+            'message' => 'Usuário criado com sucesso!',
             'user' => $user,
-            'authorisation' => [
-                'token' => $token,
-                'type'=>'bearer'
-            ]
+            'token' => $token,
+            'type' => 'bearer'
+
         ]);
     }
 

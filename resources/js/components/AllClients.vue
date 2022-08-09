@@ -1,6 +1,6 @@
 <template>
     <div class="container">
-        <h3 class="text-center">Cadastrados</h3>
+        <h3 class="text-center">{{ bemvinda }} usuários cadastrados</h3>
         <div class="row q-pa-md justify-center">
             <q-markup-table class="table table-bordered" width="80%">
                 <thead class="text-center">
@@ -82,7 +82,7 @@
 </template>
 
 <script>
-import { onMounted, ref } from "vue";
+import { onMounted, ref, computed } from "vue";
 import axios from "axios";
 import { useRouter, useRoute } from "vue-router";
 import { useQuasar } from "quasar";
@@ -99,9 +99,15 @@ export default {
             paginator.value = data;
         };
         onMounted(() => {
+            console.log($q.localStorage.getItem('token'))
+            console.warn($q.localStorage.getItem('name'))
             getClientes();
         });
 
+        const bemvinda = computed(() =>{
+            let nome = $q.localStorage.getItem('name')
+            return $q.localStorage.has('name') ? `Bem-vindo(a) ${nome} ` : ''
+        })
         async function deleteCliente(id, index) {
             const resp = await axios.post(`/api/clientes/${id}`, {
                 _method: "DELETE",
@@ -120,6 +126,7 @@ export default {
             paginator,
             deleteCliente,
             goToPage,
+            bemvinda
         };
     },
 };

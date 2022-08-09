@@ -25,30 +25,30 @@ use App\Http\Controllers\AuthController;
 // Route::get('teste', function () {
 //     dd(public_path(), storage_path());
 // });
-
-Route::get('/clientes', [CadastroController::class, 'index'])->name('listar.clientes');
-Route::get('/clientes/{id}', [CadastroController::class, 'getById'])->name('lista.cliente.x.id');
-Route::post('/clientes', [CadastroController::class, 'addClient'])->name('criar.cliente');
-Route::put('/clientes/{id}', [CadastroController::class, 'update'])->name('atualizar.cliente');
-Route::delete('/clientes/{id}', [CadastroController::class, 'destroy'])->name('deletar.cliente');
-
+Route::group(['middleware' => 'api'], function() {
+    Route::get('/clientes', [CadastroController::class, 'index'])->name('listar.clientes');
+    Route::get('/clientes/{id}', [CadastroController::class, 'getById'])->name('lista.cliente.x.id');
+    Route::post('/clientes', [CadastroController::class, 'addClient'])->name('criar.cliente');
+    Route::put('/clientes/{id}', [CadastroController::class, 'update'])->name('atualizar.cliente');
+    Route::delete('/clientes/{id}', [CadastroController::class, 'destroy'])->name('deletar.cliente');
+});
 
 // Route::middleware('auth:sanctum')->get('/usuarios', function (Request $request) {
 //     return $request->user();
 // });
 Route::controller(AuthController::class)->group(function () {
-    Route::post('login', 'login');
-    Route::post('register','register');
-    Route::post('logout', 'logout');
-    Route::post('refresh', 'refresh');
+    Route::post('/login', 'login');
+    Route::post('/register','register');
+    Route::post('/logout', 'logout');
+    Route::post('/refresh', 'refresh');
 
 
 });
 
 Route::controller(LoginController::class)->group(function(){
     Route::get('users', 'index');
-    Route::post('user', 'store');
-    Route::get('user/{id}', 'show');
-    Route::put('user/{id}', 'update');
-    Route::delete('/user/{id}', 'destroy');
+    Route::post('users', 'store');
+    Route::get('users/{id}', 'show');
+    Route::put('users/{id}', 'update');
+    Route::delete('/users/{id}', 'destroy');
 });

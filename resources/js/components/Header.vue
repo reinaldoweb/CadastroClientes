@@ -25,16 +25,18 @@
                     label="Fale conosco"
                     to="/cliente/contato/"
                 />
+
                 <q-space />
+                <div v-if="!currentUser">
+                    <q-btn stretch flat label="Login" to="/user/login" />
 
-                <q-btn stretch flat label="Login" to="/user/login" />
+                    <q-separator dark vertical />
+                    <q-btn stretch flat label="Register" to="/user/register" />
 
-                <q-separator dark vertical />
-                <q-btn stretch flat label="Register" to="/user/register" />
+                    <q-separator dark vertical />
 
-                <q-separator dark vertical />
-
-                <q-btn stretch flat label="Sair" to="/user/logout"/>
+                    <q-btn stretch flat label="Sair" @click="logout" />
+                </div>
             </q-toolbar>
         </div>
     </div>
@@ -87,14 +89,23 @@
             </q-carousel>
         </div>
     </div>
-
 </template>
 <script>
 import { ref } from "vue";
 export default {
     name: "Header",
     setup() {
+        const leftDrawerOpen = ref(false);
+
+        function logout() {
+            console.log("logout");
+        }
         return {
+            leftDrawerOpen,
+            toggleLeftDrawer() {
+                leftDrawerOpen.value = !leftDrawerOpen.value;
+            },
+            logout,
             slide: ref("style"),
             lorem: "Lorem ipsum dolor, sit amet consectetur adipisicing elit. Itaque voluptatem totam, architecto cupiditate officia rerum, error dignissimos praesentium libero ab nemo.",
         };

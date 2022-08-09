@@ -26,22 +26,6 @@ class LoginController extends Controller
         );
     }
 
-    // public function auth(Request $request)
-    // {
-    //     $email = $request->get('email');
-    //     $password = $request->get('password');
-
-    //     $user = new User();
-    //     $usuario = $user->where('email', $email)
-    //         ->where('password', $password)
-    //         ->get()
-    //         ->first();
-    //     if (isset($usuario->name)) {
-    //         return response()->json(['message' => 'Usuário não existe']);
-    //     }
-    //     return response()->json(['message' => 'Usuário existe']);
-    // }
-
     public function store(Request $request)
     {
 
@@ -49,7 +33,6 @@ class LoginController extends Controller
         if (!$users) {
             return response()->json(['message' => 'Erro ao salvar', 422]);
         } else {
-
             return response()->json(['message' => 'Usuário criado com sucesso!']);
         }
         return new UserResource($users);

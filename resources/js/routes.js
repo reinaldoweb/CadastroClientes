@@ -7,6 +7,7 @@ import Login from './pages/Login.vue'
 import Register from './components/Register.vue'
 
  const routes = [
+
     {
         name: 'home',
         path:'/',
@@ -15,12 +16,15 @@ import Register from './components/Register.vue'
     {
         name: 'listarClientes',
         path:'/listar/clientes',
-        component: AllClients
+        component: AllClients,
+        // component: () => import('./pages/Login.vue')
+
     },
     {
         name: 'addClientes',
         path: '/adicionar/cliente',
-        component: AddClient
+        component: AddClient,
+        // component: () => import('./pages/Login.vue')
     },
     {
         name: 'editClientes',
@@ -47,6 +51,7 @@ import Register from './components/Register.vue'
             path: '/user/register',
             component: Register
         }
+
 
 ];
 
